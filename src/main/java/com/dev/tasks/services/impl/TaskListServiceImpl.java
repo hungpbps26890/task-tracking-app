@@ -52,6 +52,10 @@ public class TaskListServiceImpl implements TaskListService {
 
     @Override
     public Optional<TaskList> getTaskList(UUID id) {
+        if (!taskListRepository.existsById(id)) {
+            throw new IllegalArgumentException("Task list not found!");
+        }
+
         return taskListRepository.findById(id);
     }
 
